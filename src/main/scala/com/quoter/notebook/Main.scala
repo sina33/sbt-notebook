@@ -36,7 +36,10 @@ object Main {
             args(1).toLowerCase match {
               case "about" => {
                 // comma separated parse
-                notebook.printPostCollection( notebook.searchTags( args(2).split(",") ) )
+                if (notebook.posts != null)
+                  notebook.printPostCollection( notebook.searchTags( args(2).split(",") ) )
+                else
+                  println("# notebook is empty.")
               }
               case _ => {
                 print_usage()

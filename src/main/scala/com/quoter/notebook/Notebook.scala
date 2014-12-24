@@ -7,16 +7,17 @@ import scala.io.Source
 /**
  * Created by sina on 12/23/14.
  */
+// todo: interface for notebook (trait)
 // todo: add Date & Time to posts
 
 object notebook {
 
   import java.io.File
 
+  // todo: setting.nb create, update, load
   val settingFileName = ".setting.nb"
-  var posts: Array[String] = if (new File(settingFileName).exists()) Source.fromFile(settingFileName).getLines().toArray[String] else null
+  var posts: Array[String] = if (settingExist) Source.fromFile(settingFileName).getLines().toArray[String] else null
   var table = Array.apply(new Items)
-  //[Items] //(posts.length)
 
   // todo: read a sorted table from file
   def load() = {
@@ -26,8 +27,7 @@ object notebook {
 
   def newPost(uk: String): Boolean = {
     // todo: check if the key is unique
-    val dirName = new File(uk)
-    if (!dirName.mkdir()) {
+    if (!new File(uk).mkdir()) {
       println("# directory name exist. choose a unique title.")
       return false
     }
@@ -46,12 +46,13 @@ object notebook {
 
   def searchTags(tag: Array[String]): Array[Items] = {
     //val TagMatchPoint = 1
+    println("THIS IS NOT A JOKE")
     for (i <- 0 until posts.length) {
       table(i).uk = posts(i)
       table(i).tagList = Source.fromFile(posts(i) + "/tags.txt").getLines().mkString.split(",")
       for (t <- tag)
         if (table(i).tagList contains t)
-          table(i).points = table(i).points + 1//TagMatchPoint
+          table(i).points = table(i).points + 1 //TagMatchPoint
     }
     table.sortBy(_.points)
   }
@@ -61,5 +62,20 @@ object notebook {
       println(i.toString)
       println(Source.fromFile(i.uk + "/content.txt").getLines() + "\n")
     }
+  }
+
+  def settingExist: Boolean = {
+    if (new File(settingFileName).exists()) true
+    else false
+  }
+
+  def loadSetting: Unit = {
+
+  }
+
+  def createSetting: Unit = {
+    val pw = new PrintWriter(new File(settingFileName))
+    pw.write("")
+    pw.close
   }
 }
