@@ -43,9 +43,7 @@ libraryDependencies ++= Seq(
   , "commons-lang" % "commons-lang" % "2.6"
   , "org.scala-lang" % "scala-library" % "2.10.4"
   , "org.scala-lang" % "scala-compiler" % "2.10.4"
-//  , "com.github.axel22" %% "scalameter" % "0.4-M2"
-//  , "org.apache.commons" % "commons-io" % "1.3.2"
-  , "org.scala-lang" % "jline" % "2.9.0-1"
+  , "org.scala-lang" % "jline" % "2.10.4"
   , "junit" % "junit" % "4.11"
 )
 
