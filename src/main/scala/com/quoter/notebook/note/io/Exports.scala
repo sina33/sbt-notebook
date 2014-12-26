@@ -5,9 +5,9 @@ import com.quoter.notebook.note.Note
 /**
  * Created by sina on 12/26/14.
  */
-trait Export extends Note {
-  def txtFile
-  def console
+trait Exports extends Note {
+  def txtFile: String
+  def console: String
   
-  tag = "#tag"
+  //tag = "#tag"
 }

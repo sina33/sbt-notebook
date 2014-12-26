@@ -1,14 +1,12 @@
-package com.quoter.notebook.note.io.import
+package com.quoter.notebook.note.io.imports
 
-.
-
-import
+import com.quoter.notebook.note.io.Imports
 
 /**
  * Created by sina on 12/26/14.
  */
-class Input extends Import {
-  override def console: Unit = ???
+class Input extends Imports {
+  override def console: String = ???
 
-  override def txtFile: Unit = ???
+  override def txtFile(file: String): Unit = ???
 }

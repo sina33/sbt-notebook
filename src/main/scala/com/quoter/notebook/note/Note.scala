@@ -1,19 +1,20 @@
 package com.quoter.notebook.note
 
-import com.quoter.notebook.note.io.{Export, Import}
+import com.quoter.notebook.note.io.export.Output
+import com.quoter.notebook.note.io.imports.Input
+import com.quoter.notebook.note.io.{Exports, Imports}
 
 /**
  * Created by sina on 12/26/14.
  */
 class Note(val uk: String) {
-  def this() = this(System.currentTimeMillis())
-  def this(i: Import, o: Export) = this("hi")
+  def this() = this(System.currentTimeMillis().toString)
 
   val time = System.currentTimeMillis()
   var context: String = null
   var tag: String = null
   var cat: String = null
-  
-  val in: Import
-  val out: Export
+
+  val in: Imports = new Input
+  val out: Exports = new Output
 }
