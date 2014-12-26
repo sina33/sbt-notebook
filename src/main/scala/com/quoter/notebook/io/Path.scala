@@ -1,14 +1,16 @@
-package com.quoter.notebook.note.io
+package com.quoter.notebook.io
 
 import com.quoter.notebook.note.Note
 
 /**
- * Created by sina on 12/26/14.
+ * Created by sina on 12/27/14.
  */
-class Filing extends Note {
-  val root = "."
+class Path(val n: Note, val root: String) {
+  def this(n: Note) = this(n, ".")
+
+  //val root = "."
   val sep = "/"
-  val noteDir = root + sep + uk
+  val noteDir = root + sep + n.uk
   val txtFile = root + sep + noteDir + sep + "text"
   val tagFile = root + sep + noteDir + sep + "tag"
   val catFile = root + sep + noteDir + sep + "cat"

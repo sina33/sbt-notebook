@@ -2,8 +2,6 @@ package com.quoter.notebook
 
 import com.quoter.notebook.nb.NotebookCore
 import com.quoter.notebook.note.Note
-import com.quoter.notebook.note.io.imports.Input
-import com.quoter.notebook.note.io.{Imports, Exports}
 
 /**
  * Created by sina on 12/26/14.
@@ -13,7 +11,7 @@ object App {
     val nb: NotebookIFace = new NotebookCore
     args(0) match {
       case "-n" => {
-        nb.newNote( new Note().in.fromConsole )
+        nb.newNote( nb.io.fromConsole() )
       }
       case "-s" => {
         val keys = readLine()
@@ -22,6 +20,10 @@ object App {
       }
       case "-r" => {
         nb.deleteNote( readLine() )
+      }
+      case "-v" => {
+//        nb.viewNote(nb.io.toConsole())
+        
       }
     }
   }
