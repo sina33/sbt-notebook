@@ -13,7 +13,7 @@ object App {
     val nb: NotebookIFace = new NotebookCore
     args(0) match {
       case "-n" => {
-        nb.newNote( new Note().in.console )
+        nb.newNote( new Note().in.fromConsole )
       }
       case "-s" => {
         val keys = readLine()
