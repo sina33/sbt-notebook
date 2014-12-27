@@ -8,11 +8,11 @@ import com.quoter.notebook.note.Note
 trait NotebookIFace {
 
   val io: IOiFace
+  
   def newNote(note: Note): Boolean
-
   def searchNote(keys: String): Array[Note]
   def viewNote(notes: Array[Note]): Unit
   def deleteNote(uk: String): Boolean
   
-  //def scanFolder
+//  def scanFolder: Unit
 }

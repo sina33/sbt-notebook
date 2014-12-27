@@ -5,10 +5,17 @@ import java.io.{PrintWriter, File}
 import com.quoter.notebook.IOiFace
 import com.quoter.notebook.note.Note
 
+import scala.io.Source
+
 /**
  * Created by sina on 12/27/14.
  */
 class RW extends IOiFace {
+  override def del(uk: String): Boolean = {
+    val p = new Path(new Note(uk))
+    new File(p.noteDir).delete()
+  }
+
   override def save(n: Note): Boolean = {
     val p = new Path(n)
     if( new File(p.noteDir).exists() ) {
@@ -22,6 +29,8 @@ class RW extends IOiFace {
       pw2.println(n.cat); pw2.close()
       val pw3 = new PrintWriter(p.tagFile)
       pw3.println(n.tag); pw3.close()
+      val pw4 = new PrintWriter(p.timFile)
+      pw4.println(n.time); pw4.close()
       true
     }
   }
@@ -38,6 +47,17 @@ class RW extends IOiFace {
   }
 
   override def fromTxtFile(): Note = ???
+  
+  override def load(uk: String): Note = {
+    val n = new Note(uk)
+    val p = new Path(n)
+    println(p.txtFile)
+    n.context = Source.fromFile(p.txtFile).getLines().mkString("\n")
+    n.cat = Source.fromFile(p.catFile).getLines().mkString
+    n.tag = Source.fromFile(p.tagFile).getLines().mkString
+    n.time = Source.fromFile(p.timFile).getLines().mkString.toLong
+    n
+  }
 
   override def toConsole(n: Note): Unit = {
     val post = n.uk + "   @ " + n.time + "   in " + n.cat +

@@ -9,10 +9,13 @@ class Path(val n: Note, val root: String) {
   def this(n: Note) = this(n, ".")
 
   //val root = "."
+  val settingFile = ".setting.nb"
   val sep = "/"
   val noteDir = root + sep + n.uk
-  val txtFile = root + sep + noteDir + sep + "text"
-  val tagFile = root + sep + noteDir + sep + "tag"
-  val catFile = root + sep + noteDir + sep + "cat"
+  
+  val timFile = noteDir + sep + "time"
+  val txtFile = noteDir + sep + "text"
+  val tagFile = noteDir + sep + "tag"
+  val catFile = noteDir + sep + "cat"
 
 }

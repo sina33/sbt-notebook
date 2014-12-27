@@ -9,9 +9,15 @@ import com.quoter.notebook.note.Note
  */
 class NotebookCore extends NotebookIFace {
 
+  val setting : Setting = new Setting()
+  //setting.load()
+  
   override val io: IOiFace = new RW
 
-  override def newNote(note: Note): Boolean = io.save(note)
+  override def newNote(note: Note): Boolean = {
+    setting.add(note)
+    io.save(note)
+  }
 
   override def viewNote(notes: Array[Note]): Unit = {
     for(n <- notes) {
@@ -20,7 +26,13 @@ class NotebookCore extends NotebookIFace {
     }
   }
 
-  override def searchNote(keys: String): Array[Note] = ???
+  override def searchNote(keys: String): Array[Note] = {
+    if(keys == null) return setting.notes.toArray
+    else return setting.notes.toArray
+  }
 
-  override def deleteNote(uk: String): Boolean = ???
+  override def deleteNote(uk: String): Boolean = {
+    setting.delete(uk)
+    io.del(uk)
+  }
 }
