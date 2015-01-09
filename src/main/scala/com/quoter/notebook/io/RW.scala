@@ -51,11 +51,12 @@ class RW extends IOiFace {
   override def load(uk: String): Note = {
     val n = new Note(uk)
     val p = new Path(n)
-    println(p.txtFile)
+    
     n.context = Source.fromFile(p.txtFile).getLines().mkString("\n")
     n.cat = Source.fromFile(p.catFile).getLines().mkString
     n.tag = Source.fromFile(p.tagFile).getLines().mkString
     n.time = Source.fromFile(p.timFile).getLines().mkString.toLong
+    println(p.noteDir + "\t  #" + n.tag)
     n
   }
 

@@ -12,15 +12,15 @@ object App {
     if (args.size == 0) nb.viewNote(nb.searchNote(null))
     else
       args(0) match {
-        case "-n" => {
+        case "-n" => {    // new note
           nb.newNote(nb.io.fromConsole())
         }
-        case "-s" => {
+        case "-s" => {    // search notes
           val keys = readLine()
           val t: Array[Note] = nb.searchNote(keys)
           nb.viewNote(nb.searchNote(keys))
         }
-        case "-r" => {
+        case "-r" => {    // delete note
           nb.deleteNote(readLine())
         }
         case "-v" => {

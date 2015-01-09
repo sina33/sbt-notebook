@@ -1,7 +1,7 @@
 package com.quoter.notebook.nb
 
 
-import java.io.{PrintWriter}
+import java.io.{File, PrintWriter}
 
 import com.quoter.notebook.IOiFace
 import com.quoter.notebook.io.{RW}
@@ -9,7 +9,6 @@ import com.quoter.notebook.note.Note
 
 import scala.collection.mutable.ListBuffer
 import scala.io.Source
-import scala.reflect.io.File
 
 
 /**
@@ -24,12 +23,13 @@ class Setting(val settingFile: String) {
   
   def load() : Unit = {
     println("loading setting...")
-    if(! File(settingFile).exists)
-      File(settingFile).createFile(true)
+    if(! new File(settingFile).exists)
+      new File(settingFile).createNewFile()
     for(i <- Source.fromFile(settingFile).getLines() )
       if(i.length > 0) notes.append( io.load(i) )
 //    notes.::(new Note("havij" + System.currentTimeMillis()))
-    println("setting loaded : " + notes.toArray.length + "  =  " + notes.count(i => i.uk.length > 0))
+    println("setting loaded : " + notes.toArray.length + " notes"  ) //+ notes.count(i => i.uk.length > 0))
+    println("\t\t==========================\n")
   }
 
   def save() : Unit = {
@@ -43,7 +43,7 @@ class Setting(val settingFile: String) {
   
   def add(n: Note) = {
     notes.append(n)
-    println("hi" + (notes.collect {case i:Note => i.uk} ).mkString("\n") )
+    println( (notes.collect {case i:Note => i.uk} ).mkString("\n") )
     save()
   }
   
